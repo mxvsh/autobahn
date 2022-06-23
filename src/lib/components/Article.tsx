@@ -140,7 +140,14 @@ const Article: React.FC<{ post: IPost }> = ({ post }) => {
 							>
 								Save
 							</Button>
-							<Button variant={'outline'}>Cancel</Button>
+							<Button
+								variant={'outline'}
+								onClick={() => {
+									modal.onClose();
+								}}
+							>
+								Cancel
+							</Button>
 						</ModalFooter>
 					</ModalContent>
 				</form>
