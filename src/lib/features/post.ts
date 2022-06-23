@@ -18,6 +18,11 @@ export const postSlice = createSlice({
 			action.payload.map((p) => state.posts.push(p));
 		},
 
+		// insert a new post
+		insertPost: (state, action: PayloadAction<IPost>) => {
+			state.posts.unshift(action.payload);
+		},
+
 		// update specific post from the array
 		updatePost: (
 			state,
@@ -29,10 +34,17 @@ export const postSlice = createSlice({
 			const index = state.posts.findIndex(
 				(p) => p.id === action.payload.whereId
 			);
-			console.log('index', index);
+
+			state.posts[index] = action.payload.data;
+		},
+
+		// remove specific post from the array
+		removePost: (state, action: PayloadAction<string>) => {
+			state.posts = state.posts.filter((p) => p.id !== action.payload);
 		},
 	},
 });
 
-export const { setPosts, updatePost } = postSlice.actions;
+export const { setPosts, updatePost, insertPost, removePost } =
+	postSlice.actions;
 export default postSlice.reducer;

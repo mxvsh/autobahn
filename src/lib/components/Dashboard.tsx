@@ -1,22 +1,17 @@
-import React from 'react';
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Heading, Stack, Text } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { IPost } from '../../types';
-import { sortAndDeduplicateDiagnostics } from 'typescript';
+import Article from './Article';
 
 const Dashboard = () => {
-	const posts = useSelector((s: { posts: IPost[] }) => s.posts);
-	console.log('posts', posts);
-sortAndDeduplicateDiagnostics
-		<div>
-			{posts?.map((post) => {
-				return (
-					<Box key={post.id}>
-						<Heading>{post.title}</Heading>
-					</Box>
-				);
+	const posts = useSelector((s: { post: { posts: IPost[] } }) => s.post);
+
+	return (
+		<Stack spacing={4}>
+			{posts?.posts.map((post, idx) => {
+				return <Article key={idx} post={post} />;
 			})}
-		</div>
+		</Stack>
 	);
 };
 
